@@ -1,3 +1,4 @@
+
 # MELE Mod Downloader (GO:LE)
 
 This project aims to bridge the gap that exists in the Mass Effect Legendary Edition modding scene.
@@ -42,6 +43,47 @@ This app bridges the auto-download feature to quickly download those mods.
 1. Ensure you have a valid Nexus Mods API key.
 2. Configure the application with your API key and desired download settings.
 3. Use the provided interface to select and download mods or modpacks.
+
+### Using GO:LE
+
+GO:LE operates in two modes: `consumer` and `run`.
+
+- The `consumer` mode sends the Nexus Mods callback URI to GO:LE. For it to function correctly, you need a desktop
+  entry. When you click the link in Nexus Mods, it should associate with this desktop file.
+
+- The `run` command listens to what the `consumer` sends and processes it accordingly.
+
+### Consumer
+
+Create a `gole-consume.desktop` entry with the following content. Please adjust the `Path` and
+`Exec` specifications as needed:
+
+> This is a Development .desktop file
+
+```
+[Desktop Entry]
+Name=GO:LE - Consumer
+Path=~/GolandProjects/MELE-Mod-Downloader
+Exec=go run cmd/main.go consume %u
+Terminal=true
+Type=Application
+MimeType=x-scheme-handler/nxm;
+```
+
+### Runner
+
+> This is a Development .desktop file
+
+```
+[Desktop Entry]
+Name=GO:LE - Mass Effect:LE mod downloader
+Path=~/GolandProjects/MELE-Mod-Downloader
+Exec=go run main.go run %u
+Terminal=true
+Type=Application
+MimeType=x-scheme-handler/nxm;
+
+```
 
 ## License
 
