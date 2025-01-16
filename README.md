@@ -45,7 +45,7 @@ This app bridges the auto-download feature to quickly download those mods.
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](./license.md) file for details.
+This project is licensed under the GNU General Public License v3.0. See the [LICENSE](./LICENCE) file for details.
 
 ## Contributing
 
