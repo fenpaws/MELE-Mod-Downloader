@@ -18,7 +18,7 @@ func HandleNxmURL(parsedURL *url.URL) NXMInfo {
 }
 
 func handleNXM(u *url.URL) NXMInfo {
-	log.WithField("url", u.String()).WithField("path", u.Path).WithField("query", u.RawQuery).Debug("Handling NMM URL")
+	log.WithField("url", u.String()).WithField("path", u.Path).WithField("query", u.RawQuery).Debug("Handling NXM URL")
 
 	pathParts := strings.Split(u.Path, "/")
 
