@@ -15,7 +15,6 @@ import (
 	"net/url"
 	"os"
 	"sync"
-	"time"
 )
 
 var runCmd = &cobra.Command{
@@ -66,7 +65,6 @@ func runServer(ctx context.Context, biq2 *models.ModCollection) {
 		return
 	}
 
-	time.Sleep(1 * time.Minute)
 }
 
 func execute(ctx context.Context, biq2 *models.ModCollection, modChannel chan string) error {
@@ -110,22 +108,30 @@ func execute(ctx context.Context, biq2 *models.ModCollection, modChannel chan st
 			ModName: mod.Modname,
 			URL:     link.URI,
 		})
+
+		log.WithContext(ctx).WithField("mod", mod.Modname).Info("Mod found and added to download list")
 	}
 
 	log.WithContext(ctx).WithField("found_mods", len(modDownloadList)).Info("Successfully found mods")
 
+	downloadMods(ctx, modDownloadList)
+
+	return nil
+}
+
+func downloadMods(ctx context.Context, modDownloadList []models.ModDownloadInfo) {
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, 3)
+	mpb := utils.NewMultiProgressBar(os.Stdout)
+
 	for _, modDownload := range modDownloadList {
 		wg.Add(1)
 		sem <- struct{}{}
 		go func(url models.ModDownloadInfo) {
 			defer func() { <-sem }()
-			internal.DownloadFile(ctx, modDownload.URL, modDownload.ModName, "./mods", &wg)
+			internal.DownloadFile(ctx, modDownload.URL, modDownload.ModName, "./mods", &wg, mpb)
 		}(modDownload)
 	}
 
 	wg.Wait()
-
-	return nil
 }

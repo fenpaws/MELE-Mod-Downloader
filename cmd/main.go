@@ -7,7 +7,7 @@ import (
 
 func init() {
 	// Set up the logger based on the configuration
-	utils.SetupLogger("TRACE", "PLAIN")
+	utils.SetupLogger("INFO", "PLAIN")
 
 }
 
