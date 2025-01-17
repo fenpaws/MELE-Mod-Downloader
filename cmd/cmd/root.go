@@ -12,7 +12,7 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(consumeCmd)
+	rootCmd.AddCommand(submitURLCmd)
 	rootCmd.AddCommand(runCmd)
 
 }

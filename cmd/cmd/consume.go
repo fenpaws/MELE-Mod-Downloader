@@ -9,9 +9,10 @@ import (
 	"net/http"
 )
 
-var consumeCmd = &cobra.Command{
-	Use:   "consume [nxm://]",
-	Short: "Gets the callback URL from NexusMods",
+var submitURLCmd = &cobra.Command{
+	Use:   "submit-url [nxm://]",
+	Short: "Submit a NexusMods callback URL to the GOLE server",
+	Long:  `This command submits a NexusMods callback URL to the GOLE server, allowing it to process and handle the mod download request.`,
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sendRequest(args[0])

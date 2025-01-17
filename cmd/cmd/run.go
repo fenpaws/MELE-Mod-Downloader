@@ -20,8 +20,11 @@ import (
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "Runs GOLE",
-	Args:  cobra.MaximumNArgs(1),
+	Short: "Start the GOLE server and process mod collections",
+	Long: `This command starts the GOLE (Mass Effect: Legendary Edition Mod Downloader) server, 
+loads and parses the specified mod collection, and processes the mods for download.`,
+
+	Args: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := context.Background()
 
